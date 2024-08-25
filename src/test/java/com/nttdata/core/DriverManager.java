@@ -25,6 +25,7 @@ public class DriverManager {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
+
     @Before(order = 1)
     public void setScenario(Scenario scenario){
         this.scenario = scenario;
