@@ -1,12 +1,13 @@
 package com.nttdata.steps;
 
-
 import com.nttdata.page.homePage;
+import com.nttdata.page.carritoPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import static com.nttdata.page.carritoPage.botonaumentarcantidad;
 
 public class homeSteps {
 
@@ -36,16 +37,6 @@ public class homeSteps {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     //Navegar a una subcategoría Men
     public void navegarSubCategoria(String subcategory){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -54,65 +45,26 @@ public class homeSteps {
     }
 
     // Método para hacer clic en el primer producto
-    public void clickFirstProduct() {
-        driver.findElement(homePage.seleccionProducto).click();
+    public void seleccionarPrimerProducto() {
+        driver.findElement(carritoPage.seleccionProducto).click();
     }
 
-    // Método para seleccionar la cantidad deseada
+    /*/ Método para seleccionar la cantidad deseada Fallo pero se deja como referencia
     public void añadircantidad(String cantidad) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement elementoCantidad = wait.until(ExpectedConditions.visibilityOfElementLocated(homePage.cantidadInput));
         elementoCantidad.clear(); // Limpia el campo de entrada antes de ingresar la cantidad
         elementoCantidad.sendKeys(cantidad); // Ingreso la cantidad deseada
-    }
+    }*/
 
-    // Método para agregar el producto al carrito
-    public void agregarProductoCarrito() {
-        driver.findElement(homePage.botonAñadirCarrito).click();
-    }
-
-     // Validar si el popup de confirmación del producto agregado se muestra
-    public boolean muestraPopupProductoAgregado(){
+    public void añadircantidad(int cantidad) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement validoPopUp = wait.until(ExpectedConditions.visibilityOfElementLocated(homePage.PopupSelector));
-        return validoPopUp.isDisplayed();
+        wait.until(ExpectedConditions.elementToBeClickable(botonaumentarcantidad));
+
+        for (int i = 1; i < cantidad; i++) {
+            driver.findElement(botonaumentarcantidad).click();
+        }
     }
 
-
-     // Obtener el monto total mostrado en el popup de confirmación
-    public String obtenerMontoTotalpopup() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement montoTotal = wait.until(ExpectedConditions.visibilityOfElementLocated(homePage.montoTotalPopup));
-        String montoTotalFinal = montoTotal.getText();
-
-        // Aqui estamos eliminando los caracteres no deseados como el espacio y la moneda, para poder hacer el assert si no no funciona :(
-        montoTotalFinal = montoTotalFinal.replace("\u00A0", "").replace("PEN", "").trim();
-        return montoTotalFinal;
-    }
-
-     //Hacer clic en el botón de finalizar compra
-    public void clickCheckout(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement finalizarCompra = wait.until(ExpectedConditions.elementToBeClickable(homePage.botonFinalizarCompraPopup));
-        finalizarCompra.click();
-    }
-
-
-     //Obtener el título de la página del carrito
-        public String obtenerTituloPaginaCarrito(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement titulo = wait.until(ExpectedConditions.visibilityOfElementLocated(homePage.tituloCarrito));
-        return titulo.getText();
-    }
-
-     //Obtener el monto total en el carrito
-    public String obtenerMontoTotalPaginaCarrito(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement montoTotalCarrito = wait.until(ExpectedConditions.visibilityOfElementLocated(homePage.montoTotalCarrito));
-        String montoFinalPaginaCarrito = montoTotalCarrito.getText();
-
-        montoFinalPaginaCarrito = montoFinalPaginaCarrito.replace("\u00A0", "").replace("PEN", "").trim();
-        return montoFinalPaginaCarrito;
-    }
 
 }

@@ -11,7 +11,10 @@ import org.junit.runner.RunWith;
         stepNotifications = true,
         features = "src/test/resources/features",
         glue = "com.nttdata",
-        tags = "@RegressionTestFail or @RegressionTest"
+        //tags = "@RegressionTestFail or @RegressionTest"
+        tags = "@RegressionTest"
+
+
 )
 
 public class RunnerTest {

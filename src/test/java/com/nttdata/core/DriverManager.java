@@ -1,12 +1,12 @@
 package com.nttdata.core;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
+import io.cucumber.java.After; // Importamos la anotación @After de Cucumber para ejecutar código al final de un escenario.
+import io.cucumber.java.Before; // Importamos la anotación @Before de Cucumber para ejecutar código antes de cada escenario.
+import io.cucumber.java.Scenario; // Importamos la clase Scenario de Cucumber, que permite manejar información de los escenarios en ejecución.
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.TakesScreenshot; // Interface de Selenium que permite tomar capturas de pantalla.
+import org.openqa.selenium.WebDriver; // Importamos la interfaz WebDriver para controlar el navegador.
+import org.openqa.selenium.chrome.ChromeDriver; // Importamos la clase ChromeDriver para manejar el navegador Google Chrome.
 
 public class DriverManager {
     private static WebDriver driver;
